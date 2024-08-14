@@ -87,3 +87,7 @@ footer {
   font-size: 14px;
   color: rgba(33, 26, 0, 0.7);
 }
+
+select:focus {
+  outline: 0;
+}

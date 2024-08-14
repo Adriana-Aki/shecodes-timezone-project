@@ -1,38 +1,59 @@
-function setTime() {
-  let dateLondon = moment().tz("Europe/London").format("DD MMMM YYYY");
-  let timeLondon = moment().tz("Europe/London").format("hh:mm:ss");
-  let dayPartLondon = moment().tz("Europe/London").format("A");
+function setTime(event) {
+  let timeZoneLondon = "Europe/London";
+  let timeZoneMumbai = "Asia/Kolkata";
+  let timeZoneTokyo = "Asia/Tokyo";
+  let timeZoneNewYork = "America/New_York";
+  let timeZoneLosAngeles = "America/Los_Angeles";
 
-  let dateMumbai = moment().tz("Asia/Kolkata").format("DD MMMM YYYY");
-  let timeMumbai = moment().tz("Asia/Kolkata").format("hh:mm:ss");
-  let dayPartMumbai = moment().tz("Asia/Kolkata").format("A");
+  let selectedItem = event.target.value;
+  console.log(selectedItem);
+  if (selectedItem.length > 0) {
+    switch (selectedItem) {
+      case "current-location":
+        let localTimezone = moment.tz.guess();
+        updateCity(localTimezone, "Current Location");
+        break;
+      case "london":
+        updateCity("Europe/London", "London");
+        break;
+      case "tokyo":
+        updateCity("Asia/Tokyo", "Tokyo");
+        break;
+      case "losAngeles":
+        updateCity("America/Los_Angeles", "Los Angeles");
+        break;
+      case "newYork":
+        updateCity("America/New_York", "New York");
+        break;
+      case "mumbai":
+        updateCity("Asia/Kolkata", "Mumbai");
+        break;
+      default:
+        break;
+    }
+  }
+  console.log();
+}
 
-  let dateTokyo = moment().tz("Asia/Tokyo").format("DD MMMM YYYY");
-  let timeTokyo = moment().tz("Asia/Tokyo").format("hh:mm:ss");
-  let dayPartTokyo = moment().tz("Asia/Tokyo").format("A");
+function updateCity(timeZone, city) {
+  let dateCity = moment().tz(`${timeZone}`).format("DD MMMM YYYY");
+  let timeCity = moment().tz(`${timeZone}`).format("hh:mm:ss");
+  let dayPartCity = moment().tz(`${timeZone}`).format("A");
+  console.log(city);
+  console.log(timeCity);
+  console.log(timeCity);
 
-  let dateNewYork = moment().tz("America/New_York").format("DD MMMM YYYY");
-  let timeNewYork = moment().tz("America/New_York").format("hh:mm:ss");
-  let dayPartNewYork = moment().tz("America/New_York").format("A");
-
-  let dateLosAngeles = moment()
-    .tz("America/Los_Angeles")
-    .format("DD MMMM YYYY");
-  let timeLosAngeles = moment().tz("America/Los_Angeles").format("hh:mm:ss");
-  let dayPartLosAngeles = moment().tz("America/Los_Angeles").format("A");
-
-  let localTimezone = moment.tz.guess();
-  let dateLocal = moment().tz(`${localTimezone}`).format("DD MMMM YYYY");
-  let timeLocal = moment().tz(`${localTimezone}`).format("hh:mm:ss");
-  let dayPartLocal = moment().tz(`${localTimezone}`).format("A");
-
+  let cityElement = document.querySelector(".city");
   let dateElement = document.querySelector(".date");
   let timeElement = document.querySelector(".time");
   let dayPartElement = document.querySelector(".day-part");
 
-  dateElement.innerHTML = dateLondon;
-  timeElement.innerHTML = timeLondon;
-  dayPartElement.innerHTML = dayPartLondon;
+  cityElement.innerHTML = city;
+  dateElement.innerHTML = dateCity;
+  timeElement.innerHTML = timeCity;
+  dayPartElement.innerHTML = dayPartCity;
 }
-setTime();
-setInterval(setTime, 1000);
+
+let citySelect = document.querySelector("#cities");
+console.log(citySelect);
+citySelect.addEventListener("change", setTime);
