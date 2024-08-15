@@ -57,3 +57,9 @@ function updateCity(timeZone, city) {
 let citySelect = document.querySelector("#cities");
 console.log(citySelect);
 citySelect.addEventListener("change", setTime);
+
+updateCity("Europe/London", "London");
+
+setInterval(function () {
+  updateCity("Europe/London", "London");
+}, 1000);

@@ -59,11 +59,15 @@ select {
 
 .city {
   color: #211a00;
+  font-size: 26px;
+  font-weight: bold;
+  margin-bottom: 5px;
 }
 
 .date {
   opacity: 0.7;
   color: #211a00;
+  font-size: 16px;
 }
 
 .current-time {
